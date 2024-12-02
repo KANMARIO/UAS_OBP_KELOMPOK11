@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rawat Page</title>
+    <link rel="icon" type="foto/LOGOOBP.png" href="foto/LOGOOBP3.png">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    <link rel="stylesheet" href="css/style.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
+
+  <body style="background-color: hsl(0, 0%, 96%)">
+
+     <!-- NAVBAR BOOTSTRAP -->
+     <nav class="navbar py-0 gx-0 navbar-expand-lg sticky-top navbar-light bg-white">
+      <div class="container-fluid">
+  
+        <a class="navbar-brand" href="http://localhost:8081/" style="font-size: 30px; font-weight: bold; margin: auto;">
+          <img src="foto/LOGOOBP.png" alt="Logo" width="70px" height="auto" class="mx-3">
+        </a>
+  
+    <!-- TOMBOL UNTUK SIMPAN NAV-ITEM KALAU WEB NYA DI KECILIN -->
+        <button class="navbar-toggler mx-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span></button>
+      </div>
+    </nav>
+
+
+<br>
+<!-- Section: Design Block -->
+<section>
+  <!-- Jumbotron -->
+  <div class="px-4 py-4 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container d-flex flex-row align-items-start">
+      <div class="row gx-lg-5 align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <section class="first-box">
+            <h2 class="header">Antrian Klinik</h2>
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Antrian</th>
+                  <th style="text-align: center;">Tanggal</th>
+                </tr>
+              </thead>
+      
+              <tbody th:each="rawat : ${rawList}">
+                <tr>
+                  <td style="text-align: center;" th:text="${rawat.rawat_id}"></td>
+                  <td style="text-align: center;" th:text="${rawat.tanggal != null ? rawat.tanggal : ''}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+           
+        </div>
+        </div>
+         
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card">
+            <div class="card-body py-5 px-md-5">
+              <form th:action="@{/rawat/submit/add}" method="post" th:object="${rawInfo}" class="form-group">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row">
+                  <h4 style="color: #11ae1f;">Pendaftaran Antrian</h4>
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                      <label for="rawat_id" class="form-label">Nomor Antrian</label>
+                      <input type="number" id="rawat_id" name="rawat_id" th:value="${rawRec != null ? rawRec.rawat_id : 0}" required readonly/>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div data-mdb-input-init class="form-outline">
+                      <label for="pasien_id" class="form-label">Pasien Id</label>
+                      <input type="number" placeholder="Masukkan Id Anda" id="pasien_id" name="pasien_id" th:value="${rawRec?.pasien_id}" required/>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pilih Dokter -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                <select id="id" name="id" class="form-control" required>
+                  <option value="" disabled selected>-- Pilih Dokter --</option>
+                  <option th:each="dokter : ${dokList}" th:value="${dokter.id}" th:text="${dokter.nama + ' (' + dokter.spesialis + ')'}"></option>
+                </select>
+                </div>
+
+                <!-- Rekam Medis -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input type="text" id="rekam_medis" class="form-control" name="rekam_medis" placeholder="Masukkan Keluhan Anda" th:value="${rawRec?.rekam_medis}" required />
+                </div>
+
+
+                <!-- Tanggal -->
+                <div class="form">
+                  <label for="tanggal" class="form-label">Tanggal</label> <br>
+                  <input type="date" id="tanggal" name="tanggal" th:value="${rawRec?.tanggal}" required/>
+                </div><br>
+                
+
+                <!-- Submit button -->
+
+                  <form th:action="@{/rawat/submit/add}" method="post" th:object="${rawInfo}" class="form-group">
+                    <!-- Field input di sini -->
+                    <button style="background-color: #11ae1f; color: white; border-radius: 25px 25px 25px 25px;" type="submit" class="btn btn-primary" name="add">Submit</button>
+                </form>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
+ 
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="icon" type="foto/LOGOOBP.png" href="foto/LOGOOBP3.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* You can add custom styles here */
+        #alertSuccess {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+        <!-- NAVBAR BOOTSTRAP -->
+  <nav class="navbar py-0 gx-0 navbar-expand-lg sticky-top navbar-light bg-white">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="http://localhost:8081/" style="font-size: 30px; font-weight: bold; margin: auto;">
+        <img src="foto/LOGOOBP.png" alt="Logo" width="70px" height="auto" class="mx-3">
+      </a>
+
+  <!-- TOMBOL UNTUK SIMPAN NAV-ITEM KALAU WEB NYA DI KECILIN -->
+      <button class="navbar-toggler mx-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></button>
+    </div>
+  </nav>
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h2>Admin Login</h2>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+
+            <!-- Success alert (hidden by default) -->
+            <div id="alertSuccess" class="alert alert-success mt-3">
+                Login successful! Redirecting to doctor page...
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle login form submission
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form from submitting normally
+
+        // Get username and password from input fields
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Check if the credentials are correct
+        if (username === "admin" && password === "admin123") {
+            // Show success alert
+            const alertSuccess = document.getElementById("alertSuccess");
+            alertSuccess.style.display = "block";  // Show the success message
+
+            // Redirect to /dokter after a delay
+            setTimeout(() => {
+                window.location.href = "/dokter";  // Redirect to the doctor page
+            }, 2000); // 2-second delay
+        } else {
+            // Show an error message if login fails
+            alert("Login failed! Incorrect username or password.");
+        }
+    });
+</script>
+
+</body>
+</html>

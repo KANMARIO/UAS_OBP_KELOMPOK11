@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="icon" type="foto/LOGOOBP.png" href="foto/LOGOOBP3.png">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body style="background-color: #c6f8cb;">
+
+    <!-- NAVBAR BOOTSTRAP -->
+  <nav class="navbar py-0 gx-0 navbar-expand-lg sticky-top navbar-light bg-white">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="http://localhost:8081/" style="font-size: 30px; font-weight: bold; margin: auto;">
+        <img src="foto/LOGOOBP.png" alt="Logo" width="70px" height="auto" class="mx-3">
+      </a>
+
+  <!-- TOMBOL UNTUK SIMPAN NAV-ITEM KALAU WEB NYA DI KECILIN -->
+      <button class="navbar-toggler mx-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></button>
+    </div>
+  </nav>
+
+  <section>
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center mt-4 h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img src="foto/LOG.png"
+                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+  
+                  <form action="/login" method="POST">
+  
+                    <div class="mb-3">
+                     <img src="foto/LOGOOBP2.png" width="200px">
+                    </div>
+  
+                    <h5 class="fw-normal mb-2" style="letter-spacing: 1px;">Login into your account</h5>
+  
+                    <div data-mdb-input-init class="form-outline mb-2">
+                      <input type="number" class="form-control" id="pasien_id" name="pasien_id" required >
+                      <label class="form-label" for="pasien_id">Pasien ID</label>
+                    </div>
+  
+                    <div data-mdb-input-init class="form-outline mb-2">
+                      <input type="password" class="form-control" id="password" name="password" required>
+                      <label class="form-label" for="password">Password</label>
+                    </div>
+                
+                    <div class="pt-1 mb-3 d-flex flex-row">
+                      <div class="container d-flex justify-content-start" style="width: 40%;">
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="submit">Login</button>          
+                      </div>
+                      <div class="container d-flex justify-content-end" >
+                      <p class="pb-lg-2" style="color: #393f81;">Don't have an account? <a href="http://localhost:8081/pasien"
+                        style="color: #393f81;">Register here</a></p>
+                      </div>
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                      <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </symbol>
+                    </svg>
+                  
+                    <div th:if="${error}" class="alert alert-danger d-flex align-items-end mt-3" role="alert">
+                      <svg th:if="${error}" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                      <div th:if="${error}">
+                        Invalid Pasien ID or password. Please try again. 
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
